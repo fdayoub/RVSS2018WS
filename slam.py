@@ -5,7 +5,7 @@ from threading import Thread
 import time
 import numpy as np
 import sys
-sys.path.append('./thirdparties/gtsam/build/cython')
+sys.path.append('../thirdparties/gtsam/build/cython')
 import gtsam
 
 
@@ -75,6 +75,9 @@ class Slam(object):
 		# gtsam_quadrics.setMaxIterations(params, iter)
 		# gtsam_quadrics.setRelativeErrorTol(params, 1e-8)
 		# gtsam_quadrics.setAbsoluteErrorTol(params, 1e-8)
+		
+		# graph.print_('graph')
+		# initialEstimate.print_('initialEstimate ')
 		optimizer = gtsam.LevenbergMarquardtOptimizer(graph, initialEstimate, params)
 
 		# parameters = gtsam.GaussNewtonParams()
@@ -84,10 +87,8 @@ class Slam(object):
 
 		result = optimizer.optimize()
 
-		# graph.print()
-		initialEstimate.print_('initialEstimate ')
-		result.print_('result ')
-		self.draw_trajectories([self.odom_global, self.visual_global], ['b', 'r'], 2)
+		# result.print_('result ')
+		# self.draw_trajectories([self.odom_global, self.visual_global], ['b', 'r'], 2)
 
 		return self.unwrap_results(result)
 

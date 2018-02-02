@@ -1,0 +1,4 @@
+
+thirdparties/gtsam/build/
+
+*.pyc
